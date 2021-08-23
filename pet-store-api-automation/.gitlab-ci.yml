@@ -1,0 +1,28 @@
+image: maven:latest
+
+stages:
+  - build
+  - test
+  
+build:
+  stage: build
+  script:
+    - mvn clean
+    
+job1:
+  stage: test
+  timeout: 2h
+  script: mvn verify -Dcucumber.options="--tags @harveynichols --tags @sanity" -Pstage
+  
+job2:
+  stage: test
+  timeout: 2h
+  script: mvn verify -Dcucumber.options="--tags @iceland --tags @sanity" -Pstage
+
+job5:
+  stage: test
+  timeout: 2h
+  script: mvn verify -Dcucumber.options="--tags @harveynichols --tags @sanitydev" -Pdev
+
+ 
+
